@@ -95,6 +95,7 @@ class ControlPanelC extends CI_Controller {
             'adrs1' => $add1,
             'adrs2' => $add2,
             'adrs3' => $add3,
+            'profile_pic' => "",
             'roleId' => $role
         );
         $this->ControlPanelM->saveEmployee($empArray);

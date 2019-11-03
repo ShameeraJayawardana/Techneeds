@@ -1,13 +1,13 @@
 <!-- Icon Cards-->
 <div class="row">
     <div class="col-md-4">
-        <form action="index.php" method="post" enctype="multipart/form-data">
+        <form action="<?php echo base_url() ?>userProfileC/uploadImage" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-12">
                     <input type="hidden" name="MAX_FILE_SIZE" value="5000000">
                     <label class="btn btn-outline-light btn-file">
                         <img src="<?php echo $row["picture"]; ?>" id="profilepic"
-                             onerror="if (this.src != '<?php echo base_url('assets/images/avatar.jpg') ?>') this.src = 'pics/avatar.jpg';"
+                             onerror="if (this.src != '<?php echo base_url('assets/images/avatar.jpg') ?>') this.src = '<?php echo base_url('assets/images/avatar.jpg') ?>';"
                              class="img-responsive img-circle"
                              style="width: 200px; height: 200px; border-radius: 100px;"
                              title="Change profile picture">
