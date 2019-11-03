@@ -12,8 +12,9 @@ class ControlPanelM extends CI_Model {
     }
 
     public function getEmpData() {
-        $this->db->select('empId, nm1, nm2, nic, phnM, phnH, adrs1, adrs2, adrs3, roleId');
+        $this->db->select('*');
         $this->db->from('emp');
+        $this->db->join('role', 'role.roleId = emp.roleId');
         return $this->db->get()->result();
     }
 
@@ -39,5 +40,10 @@ class ControlPanelM extends CI_Model {
             $output .= '<option value="'.$row->empId.'">'.$row->nm1.'</option>';
         }
         return $output;
+    }
+    
+    public function deleteAll($id){
+        $this->db->where('empId', $id);
+        $this->db->delete('emp');
     }
 }

@@ -5,7 +5,6 @@
                 <table class="table table-responsive table-hover">
                     <tr>
                         <th></th>
-                        <th>Employee Id</th>
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>NIC number</th>
@@ -19,10 +18,7 @@
                         ?>
                         <tr>
                             <td>
-                                <input type="checkbox" class="form-control" value="<?php echo $rec->empId; ?>" style="width: 20px; height: 20px;" />
-                            </td>
-                            <td>
-                                <?php echo $rec->empId; ?>
+                                <input type="checkbox" class="form-control delete_checkbox" value="<?php echo $rec->empId; ?>" style="width: 20px; height: 20px;" />
                             </td>
                             <td>
                                 <?php echo $rec->nm1; ?>
@@ -45,7 +41,7 @@
                                 <?php echo $rec->adrs3; ?>
                             </td>
                             <td>
-                                <?php echo $rec->roleId; ?>
+                                <?php echo $rec->role; ?>
                             </td>
                         </tr>                         
                     <?php } ?>
@@ -55,3 +51,40 @@
         </div>
     </div>
 </div>
+<style>
+    .removeRow{
+        background-color: #F7DDDF;
+        color: #000000;
+    }
+</style>
+<script>
+    $(document).ready(function(){
+        $('.delete_checkbox').click(function(){
+            if($(this).is(':checked')){
+                $(this).closest('tr').addClass('removeRow');
+            }else{
+                $(this).closest('tr').removeClass('removeRow');
+            }
+        });
+        
+        $('#delete_user').click(function(){
+            var checkbox = $('.delete_checkbox:checked');
+            if(checkbox.length > 0){
+                var checkbox_value = [];
+                $(checkbox).each(function(){
+                    checkbox_value.push($(this).val());
+                });
+                $.ajax({
+                    url: "<?php echo base_url(); ?>ControlPanelC/deleteAll",
+                    method: "POST",
+                    data: {checkbox_value:checkbox_value},
+                    success: function(){
+                        $('.removeRow').fadeOut(1500);
+                    }
+                })
+            }else{
+                alert('Select atleast one record');
+            }
+        });
+    });
+</script>

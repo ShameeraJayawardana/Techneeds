@@ -7,7 +7,7 @@
                     <input type="hidden" name="MAX_FILE_SIZE" value="5000000">
                     <label class="btn btn-outline-light btn-file">
                         <img src="<?php echo $row["picture"]; ?>" id="profilepic"
-                             onerror="if (this.src != 'pics/avatar.jpg') this.src = 'pics/avatar.jpg';"
+                             onerror="if (this.src != '<?php echo base_url('assets/images/avatar.jpg') ?>') this.src = 'pics/avatar.jpg';"
                              class="img-responsive img-circle"
                              style="width: 200px; height: 200px; border-radius: 100px;"
                              title="Change profile picture">

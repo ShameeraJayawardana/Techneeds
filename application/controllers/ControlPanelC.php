@@ -120,4 +120,12 @@ class ControlPanelC extends CI_Controller {
         $this->load->view("/common/footer_view");
     }
 
+    public function deleteAll() {
+        if($this->input->post('checkbox_value')){
+            $id = $this->input->post('checkbox_value');
+            for($count = 0; $count < count($id); $count++){
+                $this->ControlPanelM->deleteAll($id[$count]);
+            }
+        }
+    }
 }

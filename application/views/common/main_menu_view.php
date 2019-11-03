@@ -24,9 +24,6 @@
 
 
         <div class="collapse navbar-collapse" id="myNavbar">
-
-
-
             <ul class="nav navbar-nav navbar-right">
                 <li class="active"><a href="<?php echo base_url('MainC/dashboard0'); ?>">Dashboard</a></li>
                 <li><a href="<?php echo base_url('InvoiceC/invoicing'); ?>">Invoice</a></li>
@@ -36,12 +33,12 @@
                 <li><a href="<?php echo base_url('ReportsC/allitemsR'); ?>">Reports</a></li>
                 <li><a href="<?php echo base_url('ControlPanelC/activityControl'); ?>">Control Panel</a></li>                
                 <li><a href="#">Contact</a></li>
-                
+
                 <li><a href="<?php echo base_url('mainC/logout'); ?>"><font color=blue size=3pt>Logout</font></a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-user"></span><?php echo " " . $this->session->userdata('username'); ?></a></li>
+                <li><a href="<?php echo base_url('userProfileC/userProfile'); ?>"><span class="glyphicon glyphicon-user"></span><?php echo " " . $this->session->userdata('username'); ?></a></li>
             </ul>
         </div>
 
