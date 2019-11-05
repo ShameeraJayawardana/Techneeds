@@ -36,10 +36,11 @@ class MainC extends CI_Controller {
             //model function
             $this->load->model('MainM');
             if ($this->MainM->can_login($username, $password)) {
-                $session_data = array(
-                    'username' => $username
-                );
-                $this->session->set_userdata($session_data);
+//                $session_data = array(
+//                    'username' => $username,
+//
+//                );
+//                $this->session->set_userdata($session_data);
                 redirect(base_url() . 'mainC/dashboard');
             } else {
                 $this->session->set_flashdata('error', 'Invalid Username and Password');

@@ -6,8 +6,6 @@ class MainM extends CI_Model {
         parent::__construct();
     }
 
-    
-
     public function veryfyUser($username, $password) {
         $this->db->where("username", $username);
         $this->db->where("password", $username);
@@ -33,6 +31,14 @@ class MainM extends CI_Model {
         $query = $this->db->get('users');
         //SELECT * FROM users WHERE userNm = '$username' AND userPw = '$password'
         if ($query->num_rows() > 0) {
+            foreach ($query->result() as $rows) {
+                $newdata = array(
+                    'user_id' => $rows->userId,
+                    'username' => $rows->userNm,
+                    'emp_id' => $rows->empId,
+                );
+            }
+            $this->session->set_userdata($newdata);
             return TRUE;
         } else {
             return FALSE;
