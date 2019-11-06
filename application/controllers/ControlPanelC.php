@@ -1,13 +1,16 @@
 <?php
 
-class ControlPanelC extends CI_Controller {
+class ControlPanelC extends CI_Controller
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->load->model('ControlPanelM');
     }
 
-    public function controlPanel() {
+    public function controlPanel()
+    {
         $this->load->view("/common/header_view");
         $this->load->view("/common/body_start_view");
         $this->load->view("/common/main_menu_view");
@@ -16,7 +19,8 @@ class ControlPanelC extends CI_Controller {
         $this->load->view("/common/footer_view");
     }
 
-    public function activityControl() {
+    public function activityControl()
+    {
 
         $this->load->view("/common/header_view");
         $this->load->view("/common/body_start_view");
@@ -27,7 +31,8 @@ class ControlPanelC extends CI_Controller {
         $this->load->view("/common/footer_view");
     }
 
-    public function addUser() {
+    public function addUser()
+    {
         $this->load->model('ControlPanelM');
         $data['records'] = $this->ControlPanelM->getRole();
 //        $data['records2'] = $this->ControlPanelM->getUserData();
@@ -40,7 +45,8 @@ class ControlPanelC extends CI_Controller {
         $this->load->view("/common/footer_view");
     }
 
-    public function addUserDetails() {
+    public function addUserDetails()
+    {
         $emp = $this->input->post('emp');
 //        $this->load->model('ControlPanelM');
 //        $data = $this->ControlPanelM->getEmpData($role);
@@ -63,7 +69,8 @@ class ControlPanelC extends CI_Controller {
         }
     }
 
-    public function addEmployee() {
+    public function addEmployee()
+    {
         $this->load->model('ControlPanelM');
         $data['records'] = $this->ControlPanelM->getRole();
 //        $data['records2'] = $this->ControlPanelM->getUserData();
@@ -76,7 +83,8 @@ class ControlPanelC extends CI_Controller {
         $this->load->view("/common/footer_view");
     }
 
-    public function addEmployeeDetails() {
+    public function addEmployeeDetails()
+    {
         $fname = $this->input->post('fname');
         $lname = $this->input->post('lname');
         $nic = $this->input->post('nic');
@@ -102,13 +110,15 @@ class ControlPanelC extends CI_Controller {
         redirect(base_url() . 'ControlPanelC/addEmployee');
     }
 
-    public function fetchEmp() {
+    public function fetchEmp()
+    {
         if ($this->input->post('roleData')) {
             echo $this->ControlPanelM->fetchEmployee($this->input->post('roleData'));
         }
     }
-    
-    public function viewUser() {
+
+    public function viewUser()
+    {
         $this->load->model('ControlPanelM');
         $data['records'] = $this->ControlPanelM->getEmpData();
 //        $data['records2'] = $this->ControlPanelM->getUserData();
@@ -121,10 +131,11 @@ class ControlPanelC extends CI_Controller {
         $this->load->view("/common/footer_view");
     }
 
-    public function deleteAll() {
-        if($this->input->post('checkbox_value')){
+    public function deleteAll()
+    {
+        if ($this->input->post('checkbox_value')) {
             $id = $this->input->post('checkbox_value');
-            for($count = 0; $count < count($id); $count++){
+            for ($count = 0; $count < count($id); $count++) {
                 $this->ControlPanelM->deleteAll($id[$count]);
             }
         }

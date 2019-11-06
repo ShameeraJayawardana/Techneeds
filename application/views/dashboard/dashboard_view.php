@@ -57,7 +57,7 @@
 
             <hr>
 
-            <a href="<?php echo base_url('MainC/my_profile'); ?>" class="btn btn-sq-lg btn-success">
+            <a href="<?php echo base_url('userProfileC/userProfile'); ?>" class="btn btn-sq-lg btn-success">
                 <!--i class="fa fa-file-text fa-5x"></i><br/-->
                 <font size=6pt >&emsp; My &emsp;<br>&emsp; &nbsp; Profile &nbsp; &emsp;</font>
             </a>
