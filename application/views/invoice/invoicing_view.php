@@ -14,7 +14,8 @@
                 <div class="form-group col-md-10" id="cust_nm">
                     <div class="input-group">
                         <span class="input-group-addon">Search</span>
-                        <input type="text" name="search_text" id="search_text" placeholder="Search by Customer Details" class="form-control" />
+                        <input type="text" name="search_text" id="search_text" placeholder="Search by Customer Details"
+                               class="form-control"/>
                     </div>
                 </div>
             </div>
@@ -61,7 +62,6 @@
         </div>
         <div id="result"></div>
     </div>
-
 
     <div class="jumbotron">
         <div class="container-fluid">
@@ -194,31 +194,28 @@
     </div>
 </div>
 <script>
-    $(document).ready(function(){
+    $('#search_text').on('input', function () {
 
         load_data();
 
-        function load_data(query)
-        {
+        function load_data(query) {
             $.ajax({
-                url:"<?php echo base_url(); ?>InvoiceC/fetchCustomer",
-                method:"POST",
-                data:{query:query},
-                success:function(data){
+                url: "<?php echo base_url(); ?>InvoiceC/fetchCustomer",
+                method: "POST",
+                data: {query: query},
+                success: function (data) {
                     $('#result').html(data);
                 }
             })
         }
 
-        $('#search_text').keyup(function(){
+        $('#search_text').keyup(function () {
             var search = $(this).val();
-            if(search != '')
-            {
+            if (search != '') {
                 load_data(search);
             }
-            else
-            {
-                load_data();
+            else {
+                $('#result').html("");
             }
         });
     });

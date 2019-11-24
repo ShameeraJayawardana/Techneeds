@@ -8,7 +8,7 @@ class StoresM extends CI_Model {
 
     public function saveAddItem($itemArray) {
         //insert data in to item table
-        $this->db->insert("item", $itemArray); //insert(table name,data array)
+        $this->db->insert("unitprice", $itemArray); //insert(table name,data array)
     }
     
     public function getItmGrp(){
@@ -16,6 +16,17 @@ class StoresM extends CI_Model {
         if ($query->num_rows() > 0){
             return $query->result();
         }
+    }
+
+    public function fetchItem($itemData) {
+        $this->db->where('grpCd', $itemData);
+        $this->db->order_by('subGrpCd', 'ASC');
+        $query = $this->db->get('itemsubgroup');
+        $output = '<option value="" selected disabled>Select Item</option>';
+        foreach ($query->result() as $row){
+            $output .= '<option value="'.$row->subGrpCd.'">'.$row->subGrp.'</option>';
+        }
+        return $output;
     }
     
      public function getItmSubGrp(){
