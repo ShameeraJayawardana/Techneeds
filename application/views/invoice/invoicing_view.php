@@ -1,7 +1,5 @@
 <!--Start invoicing-->
 <div class="container-fluid">
-
-
     <h2 align="center">Invoicing</h2>
     <div class="container">
         <form class="form-vertical" method="post">
@@ -69,37 +67,39 @@
                 <div class="form-row">
                     <!--<div class="form-horizontal">
                     <!--label class="control-label col-sm-2"  for="itm_cat">Item Category</label-->
-                    <div class="form-group col-sm-2">
-                        <select class="form-control" id="itm_cat">
+                    <div class="form-group col-md-2 col-sm-2">
+                        <select name="itm_grp" class="form-control" id="itm_grp" required>
+                            <option value="" selected disabled>Select Category</option>
                             <?php
-                            //foreach ($h->result() as $row)
-                            foreach ($records3 as $rec3) {
+                            foreach ($records3 as $rec) {
                                 ?>
-                                <?php echo $rec3->grp; ?>
+                                <option value="<?php echo $rec->grpCd; ?>"><?php echo $rec->grp; ?></option>
                             <?php } ?>
                         </select>
                     </div>
                 </div>
                 <div class="form-group col-sm-1" id="itm_cod">
-                    <input type="text" class="form-control" placeholder="Item Code">
+                    <select id="itmsub_grp" name="itmsub_grp" class="form-control" required>
+                        <option value="" selected disabled>Select Item</option>
+                    </select>
                 </div>
-                <div class="form-group col-sm-2" id="itm">
-                    <input type="text" class="form-control" placeholder="Item">
+                <div class="form-group col-sm-1" id="itm_cod">
+                    <input type="text" class="form-control" placeholder="Item Code" id="itemCode">
                 </div>
                 <div class="form-group col-sm-1" id="avlQty">
-                    <input type="text" class="form-control " placeholder="Available Qty">
+                    <input type="text" class="form-control " placeholder="Available Qty" id="avlQnty">
                 </div>
                 <div class="form-group col-sm-1" id="qty">
-                    <input type="text" class="form-control " placeholder="Qty">
+                    <input type="text" class="form-control " placeholder="Qty" id="qnty">
                 </div>
                 <div class="form-group col-sm-1" id="srl_no">
-                    <input type="text" class="form-control " placeholder="Serial No.">
+                    <input type="text" class="form-control " placeholder="Serial No." id="serl_no">
                 </div>
                 <div class="form-group col-sm-1" id="unt_prc">
-                    <input type="text" class="form-control " placeholder="Unit Price">
+                    <input type="text" class="form-control " placeholder="Unit Price" id="unit_prc">
                 </div>
                 <div class="form-group col-sm-1" id="disc">
-                    <input type="text" class="form-control " placeholder="Discount">
+                    <input type="text" class="form-control " placeholder="Discount" id="discount">
                 </div>
 
                 <div class="btn-group" role="group" aria-label="btngrp">
@@ -129,39 +129,42 @@
 
 <div class="jumbotron col-sm-12">
     <div class="container col-lg-8">
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Serial No.</th>
-                    <th>Item Description</th>
-                    <th>Quantity</th>
-                    <th>Discount</th>
-                    <th>Price</th>
-                </tr>
-                </thead>
-
-                <tbody>
-                <?php
-                //foreach ($h->result() as $row)
-                foreach ($records2 as $rec1) {
-                    ?>
-                    <?php
-                    //foreach ($h->result() as $row)
-                    foreach ($records as $rec) {
-                        ?>
-                        <tr>
-                            <td><?php echo $rec->itemCd; ?></td>
-                            <td><?php echo $rec1->subGrp; ?></td>
-                            <td><?php echo $rec->storeCd; ?></td>
-                            <td><?php echo $rec->storeCd; ?></td>
-                            <td><?php echo $rec->storeCd; ?></td>
-                        </tr>
-                    <?php }
-                }
-                ?>
-                </tbody>
-            </table>
+        <div class="table-responsive mytable">
+            <!--            <table class="table">-->
+            <!--                <thead>-->
+            <!--                <tr>-->
+            <!--                    <th>Serial No.</th>-->
+            <!--                    <th>Item Description</th>-->
+            <!--                    <th>Quantity</th>-->
+            <!--                    <th>Discount</th>-->
+            <!--                    <th>Price</th>-->
+            <!--                </tr>-->
+            <!--                </thead>-->
+            <!---->
+            <!--                <tbody>-->
+            <!--                --><?php
+            //                //foreach ($h->result() as $row)
+            //                foreach ($records2 as $rec1) {
+            //                    ?>
+            <!--                    --><?php
+            //                    //foreach ($h->result() as $row)
+            //                    foreach ($records as $rec) {
+            //                        ?>
+            <!--                        <tr>-->
+            <!--                            <td>--><?php //echo $rec->itemCd; ?><!--</td>-->
+            <!--                            <td>--><?php //echo $rec1->subGrp; ?><!--</td>-->
+            <!--                            <td>--><?php //echo $rec->storeCd; ?><!--</td>-->
+            <!--                            <td>--><?php //echo $rec->storeCd; ?><!--</td>-->
+            <!--                            <td>--><?php //echo $rec->storeCd; ?><!--</td>-->
+            <!--                        </tr>-->
+            <!--                    --><?php //}
+            //                }
+            //                ?>
+            <!--                </tbody>-->
+            <!--            </table>-->
+        </div>
+        <div id="cart_details">
+            <h3 align="center">Cart is Empty</h3>
         </div>
     </div>
     <div class="container col-lg-4">
@@ -218,6 +221,107 @@
                 $('#result').html("");
             }
         });
+    });
+</script>
+<script>
+    $('#itm_grp').change(function () {
+        var itm_grp = $("#itm_grp").val();
+        if (itm_grp != '') {
+            $.ajax({
+                url: "<?php echo base_url(); ?>InvoiceC/fetchItem",
+                method: "POST",
+                data: {itm_grp: itm_grp},
+                success: function (data) {
+                    $('.mytable').html(data);
+                }
+            })
+        }
+
+    });
+</script>
+<script>
+    $(document).ready(function () {
+
+        // $('.add_cart').click(function(){
+        $(document).on('click', '.add_cart', function () {
+            var itemCd = $(this).data("productid");
+            var subGrp = $(this).data("productname");
+            var priceWs = $(this).data("price");
+            console.log(itemCd);
+            var quantity = $('#' + itemCd).val();
+            if (quantity != '' && quantity > 0) {
+                $.ajax({
+                    url: "<?php echo base_url(); ?>InvoiceC/add",
+                    method: "POST",
+                    data: {product_id: itemCd, product_name: subGrp, product_price: priceWs, quantity: quantity},
+                    success: function (data) {
+                        alert("Product Added into Cart");
+                        $('#cart_details').html(data);
+                        $('#' + itemCd).val('');
+                    }
+                });
+            }
+            else {
+                alert("Please Enter quantity");
+            }
+        });
+
+        $('#cart_details').load("<?php echo base_url(); ?>InvoiceC/load");
+
+        $(document).on('click', '.remove_inventory', function () {
+            var row_id = $(this).attr("id");
+            if (confirm("Are you sure you want to remove this?")) {
+                $.ajax({
+                    url: "<?php echo base_url(); ?>InvoiceC/remove",
+                    method: "POST",
+                    data: {row_id: row_id},
+                    success: function (data) {
+                        alert("Product removed from Cart");
+                        $('#cart_details').html(data);
+                    }
+                });
+            }
+            else {
+                return false;
+            }
+        });
+
+        $(document).on('click', '#clear_cart', function () {
+            if (confirm("Are you sure you want to clear cart?")) {
+                $.ajax({
+                    url: "<?php echo base_url(); ?>InvoiceC/clear",
+                    success: function (data) {
+                        alert("Your cart has been clear...");
+                        $('#cart_details').html(data);
+                    }
+                });
+            }
+            else {
+                return false;
+            }
+        });
+
+    });
+</script>
+<script>
+    $('#itmsub_grp').change(function () {
+        var itmsub_grp = $("#itmsub_grp").val();
+        if (itmsub_grp != '') {
+            $.ajax({
+                url: "<?php echo base_url(); ?>InvoiceC/fetchItemDetails",
+                method: "POST",
+                data: {itmsub_grp: itmsub_grp},
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    // console.log(obj);
+                    $("#itemCode").val(obj[1]);
+                    $("#avlQnty").val(obj[8]);
+                    $("#serl_no").val(obj[9]);
+                    $("#unit_prc").val(obj[2]);
+                    $("#discount").val(obj[7]);
+                }
+            })
+        }
     });
 </script>
 
