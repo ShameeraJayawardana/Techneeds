@@ -109,18 +109,19 @@
                         Transfer
                     </button>
                 </div>
-                <html>
-                <body>
 
-
-                <script>
-                    function myFunction() {
-                        window.alert('Goods Transfer');
-                    }
-                </script>
-
-                </body>
-                </html>
+                <!--                <html>-->
+                <!--                <body>-->
+                <!---->
+                <!---->
+                <!--                <script>-->
+                <!--                    function myFunction() {-->
+                <!--                        window.alert('Goods Transfer');-->
+                <!--                    }-->
+                <!--                </script>-->
+                <!---->
+                <!--                </body>-->
+                <!--                </html>-->
 
         </div>
         </form>
@@ -128,75 +129,21 @@
 </div>
 
 <div class="jumbotron col-sm-12">
-    <div class="container col-lg-8">
+    <div class="container col-lg-12">
         <div class="table-responsive mytable">
-            <!--            <table class="table">-->
-            <!--                <thead>-->
-            <!--                <tr>-->
-            <!--                    <th>Serial No.</th>-->
-            <!--                    <th>Item Description</th>-->
-            <!--                    <th>Quantity</th>-->
-            <!--                    <th>Discount</th>-->
-            <!--                    <th>Price</th>-->
-            <!--                </tr>-->
-            <!--                </thead>-->
-            <!---->
-            <!--                <tbody>-->
-            <!--                --><?php
-            //                //foreach ($h->result() as $row)
-            //                foreach ($records2 as $rec1) {
-            //                    ?>
-            <!--                    --><?php
-            //                    //foreach ($h->result() as $row)
-            //                    foreach ($records as $rec) {
-            //                        ?>
-            <!--                        <tr>-->
-            <!--                            <td>--><?php //echo $rec->itemCd; ?><!--</td>-->
-            <!--                            <td>--><?php //echo $rec1->subGrp; ?><!--</td>-->
-            <!--                            <td>--><?php //echo $rec->storeCd; ?><!--</td>-->
-            <!--                            <td>--><?php //echo $rec->storeCd; ?><!--</td>-->
-            <!--                            <td>--><?php //echo $rec->storeCd; ?><!--</td>-->
-            <!--                        </tr>-->
-            <!--                    --><?php //}
-            //                }
-            //                ?>
-            <!--                </tbody>-->
-            <!--            </table>-->
+
         </div>
         <div id="cart_details">
             <h3 align="center">Cart is Empty</h3>
         </div>
     </div>
-    <div class="container col-lg-4">
-
-        <a href="<?php echo base_url('InvoiceC/invoicing'); ?>" class="btn btn-sq-lg btn-primary">
-            <!--i class="fa fa-file-text fa-5x"></i><br/-->
-            <img src="<?php echo base_url('assets/images/kitchen.png') ?>" width="150px" height="150px"/>
-            <!--<font size=5pt >&emsp; Invoice &emsp;<br> &emsp;</font>-->
-        </a>
-        <a href="<?php echo base_url('InvoiceC/invoicing'); ?>" class="btn btn-sq-lg btn-primary">
-            <!--i class="fa fa-file-text fa-5x"></i><br/-->
-            <img src="<?php echo base_url('assets/images/beauty.jpg') ?>" width="150px" height="150px"/>
-        </a>
-        <a href="<?php echo base_url('InvoiceC/invoicing'); ?>" class="btn btn-sq-lg btn-primary">
-            <!--i class="fa fa-file-text fa-5x"></i><br/-->
-            <img src="<?php echo base_url('assets/images/auto.jpg') ?>" width="150px" height="150px"/>
-        </a>
-        <a href="<?php echo base_url('InvoiceC/invoicing'); ?>" class="btn btn-sq-lg btn-primary">
-            <!--i class="fa fa-file-text fa-5x"></i><br/-->
-            <img src="<?php echo base_url('assets/images/petcare.jpg') ?>" width="150px" height="150px"/>
-        </a>
-        <a href="<?php echo base_url('InvoiceC/invoicing'); ?>" class="btn btn-sq-lg btn-primary">
-            <!--i class="fa fa-file-text fa-5x"></i><br/-->
-            <img src="<?php echo base_url('assets/images/sports.jpg') ?>" width="150px" height="150px"/>
-        </a>
-        <a href="<?php echo base_url('InvoiceC/invoicing'); ?>" class="btn btn-sq-lg btn-primary">
-            <!--i class="fa fa-file-text fa-5x"></i><br/-->
-            <img src="<?php echo base_url('assets/images/computer.jpg') ?>" width="150px" height="150px"/>
-        </a>
-    </div>
+    <button class="btn btn-success" id="btn_print">Submit</button>
+    <a href="<?php echo base_url() ?>invoiceC/pdfdetails" class="btn btn-success" target="_blank">Print Receipt</a>
 </div>
 <script>
+    var itemId = [];
+    var cat = [];
+    var i = 0;
     $('#search_text').on('input', function () {
 
         load_data();
@@ -238,6 +185,7 @@
         }
 
     });
+
 </script>
 <script>
     $(document).ready(function () {
@@ -247,15 +195,23 @@
             var itemCd = $(this).data("productid");
             var subGrp = $(this).data("productname");
             var priceWs = $(this).data("price");
-            console.log(itemCd);
+            cat[0] = itemCd;
+            // itemId.push(itemCd);
+            // itemId[cat] = itemCd;
+            // console.log(itemCd);
+
             var quantity = $('#' + itemCd).val();
+            cat[1] = quantity;
+            itemId[itemCd] = quantity;
+            // itemId[i] = cat;
+            // i = i+1;
             if (quantity != '' && quantity > 0) {
                 $.ajax({
                     url: "<?php echo base_url(); ?>InvoiceC/add",
                     method: "POST",
                     data: {product_id: itemCd, product_name: subGrp, product_price: priceWs, quantity: quantity},
                     success: function (data) {
-                        alert("Product Added into Cart");
+                        // alert("Product Added into Cart");
                         $('#cart_details').html(data);
                         $('#' + itemCd).val('');
                     }
@@ -264,6 +220,33 @@
             else {
                 alert("Please Enter quantity");
             }
+        });
+
+        $(document).on('click', '#customer', function () {
+            if ($(this).is(':checked')) {
+                console.log($(this).val());
+                var customer = $(this).val();
+                $.ajax({
+                    url: "<?php echo base_url(); ?>InvoiceC/searchCustomer",
+                    method: "POST",
+                    data: {customer: customer},
+                    success: function (data) {
+                        console.log(customer);
+                    }
+                });
+            }
+        });
+
+        $(document).on('click', '#btn_print', function () {
+            // console.log(itemId);
+            $.ajax({
+                url: "<?php echo base_url(); ?>InvoiceC/printReceipt",
+                method: "POST",
+                data: {itemId: itemId},
+                success: function (data) {
+                    console.log(itemId);
+                }
+            });
         });
 
         $('#cart_details').load("<?php echo base_url(); ?>InvoiceC/load");

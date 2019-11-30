@@ -42,6 +42,9 @@ class InvoiceM extends CI_Model
             $output .= '<div class="col-md-4" style="padding:16px; background-color:#f1f1f1; border:1px solid #ccc; margin-bottom:16px; height:400px" align="center">
      <h4>' . $row->subGrp . '</h4>
      <h3 class="text-danger">$' . $row->priceWs . '</h3>
+     <p class="text-center">Item Code :' . $row->itemCd . '</p>
+     <p class="text-center">Serial Number :' . $row->sNo . '</p>
+     <p class="text-center">Discount :' . $row->rDisMax . '</p>
      <input type="text" name="quantity" class="form-control quantity" id="' . $row->itemCd . '" /><br />
      <button type="button" name="add_cart" class="btn btn-success add_cart" data-productname="' . $row->subGrp . '" data-price="' . $row->priceWs . '" data-productid="' . $row->itemCd . '">Add to Cart</button>
     </div>';
@@ -85,5 +88,21 @@ class InvoiceM extends CI_Model
         }
         $this->db->order_by('custId', 'DESC');
         return $this->db->get();
+    }
+
+    public function printReceipt($id, $qty)
+    {
+        $this->db->set('quantity', 'quantity-'. $qty.'',false);
+        $this->db->where('itemCd', $id);
+        $this->db->update('unitprice');
+    }
+
+    public function searchCustomer($customer)
+    {
+        $this->db->select("*");
+        $this->db->from("customer");
+        $this->db->where('custId', $customer);
+        $query = $this->db->get();
+        return $query->result();
     }
 }
