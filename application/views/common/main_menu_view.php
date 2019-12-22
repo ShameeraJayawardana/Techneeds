@@ -28,13 +28,14 @@
                 <li class="active"><a href="<?php echo base_url('MainC/dashboard0'); ?>">Dashboard</a></li>
                 <li><a href="<?php echo base_url('InvoiceC/invoicing'); ?>">Invoice</a></li>
                 <li><a href="<?php echo base_url('StoresC/stores_allitems'); ?>">Stores</a></li>
-                <li><a href="<?php echo base_url('MainC/aboutUs'); ?>">Purchasing Order</a></li>
-                <li><a href="<?php echo base_url('MainC/aboutUs'); ?>"> Repair Center</a></li>
+                <li><a href="<?php echo base_url('PurchasingOrderC/purchse_order'); ?>">Purchasing Order</a></li>
+              <li><a href="<?php echo base_url('repaireC/addRepairItem'); ?>"> Repair Center</a></li>
+                <li><a href="<?php echo base_url('transportC/newAssign'); ?>">Transport</a></li>
                 <li><a href="<?php echo base_url('ReportsC/allitemsR'); ?>">Reports</a></li>
-                <li><a href="<?php echo base_url('ControlPanelC/activityControl'); ?>">Control Panel</a></li>                
-                <li><a href="#">Contact</a></li>
+                <li><a href="<?php echo base_url('ControlPanelC/activityControl'); ?>"><span class="glyphicon glyphicon-cog"></span> </a></li>                
+                <li><a href=<span class="glyphicon glyphicon-earphone"></span></a></li>
 
-                <li><a href="<?php echo base_url('mainC/logout'); ?>"><font color=blue size=3pt>Logout</font></a></li>
+                <li><a href="<?php echo base_url('mainC/logout'); ?>"><font color=red size=3pt><span class="glyphicon glyphicon-log-out"></span></font></a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">

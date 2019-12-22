@@ -82,7 +82,7 @@
                     <select id="itmsub_grp" name="itmsub_grp" class="form-control" required>
                         <option value="" selected disabled>Select Item</option>
                     </select>
-                </div>
+                </div> &nbsp;&nbsp;
                 <div class="form-group col-sm-1" id="itm_cod">
                     <input type="text" class="form-control" placeholder="Item Code" id="itemCode">
                 </div>
@@ -103,7 +103,7 @@
                 </div>
 
                 <div class="btn-group" role="group" aria-label="btngrp">
-                    <button id="add_itm_btn" type="submit" class="btn btn-primary form-control">Add Item</button>
+                    <button id="add_itm_btn" type="submit" class="btn btn-primary form-control">Add Item</button> &nbsp;
                     <button id="reset_btn" type="reset" class="btn btn-danger form-control">Reset</button>
                     <button id="transfer_btn" type="submit" class="btn btn-success form-control" onclick="myFunction()">
                         Transfer

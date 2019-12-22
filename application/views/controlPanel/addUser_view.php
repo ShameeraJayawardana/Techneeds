@@ -1,5 +1,5 @@
 <!--Start Activity Control-->
-<h2 align="center"><font color=purple>User's Activity Control Panel</h2>
+<h2 align="center"><font color=purple> Add New User</h2>
 
 <div class="container"> 
     <div class="col-sm-6 col-sm-offset-3"> 
@@ -54,7 +54,7 @@
                     </div>
                 </div>
                 <div class="col-sm-4 col-sm-offset-2" >
-                    <button  id="addRole_btn" type="submit" class="btn btn-primary form-control" name="addNew" >Add New Role</button>
+                    <button  id="addRole_btn" type="submit" class="btn btn-primary form-control" name="addNew" >Add User</button>
                 </div>
 
                 <div class="col-sm-4 ">

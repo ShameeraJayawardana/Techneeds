@@ -140,4 +140,10 @@ class ControlPanelC extends CI_Controller
             }
         }
     }
+    
+     public function fpdf (){
+            $this->load->library('Myfpdf');
+            $data['text']='dfgfdg';
+            $this->load->view('fpdf',$data);
+        }
 }

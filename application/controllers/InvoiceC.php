@@ -1,18 +1,16 @@
 <?php
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class InvoiceC extends CI_Controller
-{
+class InvoiceC extends CI_Controller {
 
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
         $this->load->model('InvoiceM');
         $this->load->library('pdf');
     }
 
-    public function invoicing()
-    {
+    public function invoicing() {
         $this->load->model('InvoiceM');
 //        $data['records'] = $this->InvoiceM->getInvoiceData();
 //        $data['records2'] = $this->InvoiceM->getInvoiceData2();
@@ -26,15 +24,13 @@ class InvoiceC extends CI_Controller
         $this->load->view("/common/footer_view");
     }
 
-    public function fetchItem()
-    {
+    public function fetchItem() {
         if ($this->input->post('itm_grp')) {
             echo $this->InvoiceM->fetchItem($this->input->post('itm_grp'));
         }
     }
 
-    public function add()
-    {
+    public function add() {
         $this->load->library("cart");
         $data = array(
             "id" => $_POST["product_id"],
@@ -46,13 +42,11 @@ class InvoiceC extends CI_Controller
         echo $this->view();
     }
 
-    public function load()
-    {
+    public function load() {
         echo $this->view();
     }
 
-    public function remove()
-    {
+    public function remove() {
         $this->load->library("cart");
         $row_id = $_POST["row_id"];
         $data = array(
@@ -63,15 +57,13 @@ class InvoiceC extends CI_Controller
         echo $this->view();
     }
 
-    public function clear()
-    {
+    public function clear() {
         $this->load->library("cart");
         $this->cart->destroy();
         echo $this->view();
     }
 
-    public function view()
-    {
+    public function view() {
         $this->load->library("cart");
         $output = '';
         $output .= '
@@ -120,15 +112,13 @@ class InvoiceC extends CI_Controller
         return $output;
     }
 
-    public function fetchItemDetails()
-    {
+    public function fetchItemDetails() {
         if ($this->input->post('itmsub_grp')) {
             echo $this->InvoiceM->fetchItemDetails($this->input->post('itmsub_grp'));
         }
     }
 
-    public function cust_order()
-    {
+    public function cust_order() {
         $this->load->view("/common/header_view");
         $this->load->view("/common/body_start_view");
         $this->load->view("/common/main_menu_view");
@@ -138,8 +128,7 @@ class InvoiceC extends CI_Controller
         $this->load->view("/common/footer_view");
     }
 
-    public function payment()
-    {
+    public function payment() {
         $this->load->model('InvoiceM');
         $data['records'] = $this->InvoiceM->getData();
         $this->load->view("/common/header_view");
@@ -151,8 +140,7 @@ class InvoiceC extends CI_Controller
         $this->load->view("/common/footer_view");
     }
 
-    public function reports()
-    {
+    public function reports() {
         $this->load->model('InvoiceM');
         $data['records'] = $this->InvoiceM->getData();
         $this->load->view("/common/header_view");
@@ -164,8 +152,7 @@ class InvoiceC extends CI_Controller
         $this->load->view("/common/footer_view");
     }
 
-    public function form_validation()
-    {
+    public function form_validation() {
 
         $this->load->library('form_validation');
 
@@ -175,8 +162,7 @@ class InvoiceC extends CI_Controller
         }
     }
 
-    public function addCustomer()
-    {
+    public function addCustomer() {
         $fname = $this->input->post('fname');
         $lname = $this->input->post('lname');
         $nic = $this->input->post('nic');
@@ -199,8 +185,7 @@ class InvoiceC extends CI_Controller
         redirect(base_url() . 'InvoiceC/invoicing');
     }
 
-    public function fetchCustomer()
-    {
+    public function fetchCustomer() {
         $output = '';
         $query = '';
         $this->load->model('InvoiceM');
@@ -226,7 +211,7 @@ class InvoiceC extends CI_Controller
                 $output .= '
       <tr>
        <td>
-       <form method="post" action="'. base_url() .'invoiceC/searchCustomer" id="myform">
+       <form method="post" action="' . base_url() . 'invoiceC/searchCustomer" id="myform">
             <input type="radio" id="customer" name="customer" value="' . $row->custId . '" />
        </form>
        </td>
@@ -248,16 +233,14 @@ class InvoiceC extends CI_Controller
         echo $output;
     }
 
-    public function searchCustomer()
-    {
+    public function searchCustomer() {
         $customer = $_POST["customer"];
         $newdata = array();
         $newdata = $this->InvoiceM->searchCustomer($customer);
         $this->session->set_userdata($newdata);
     }
 
-    public function printReceipt()
-    {
+    public function printReceipt() {
         $this->load->library("cart");
         $output = '';
         $output .= '
@@ -306,22 +289,49 @@ class InvoiceC extends CI_Controller
         $this->pdf->stream("new.pdf", array("Attachment" => 0));
     }
 
-    public function pdfdetails()
-    {
+    public function pdfdetails() {
         $this->load->library("cart");
         $nm1 = $this->session->userdata('nm1');
         $output = '';
         $output .= '
   <div class="table-responsive">
    <br />
-   <p>' . $nm1 ." ". $nm1 . '</p>
+   <p>' . $nm1 . " " . $nm1 . '</p>
+       
    <table class="table table-bordered">
+   <tr>
+   <td width=55%><img src="assets/images/logo_techneeds.jpg"/></td>      
+     <td width=45%> Tel   :     0112733222 <br> Hotline  :    0719555500 <br>
+     Email  :    info@recent.lk <br> 
+     Website  :  www.techneeds.lk 
+     </td></tr>
+     <tr> <td width=25%></td><td width=75%>      
+     94/1/1,Pepiliyana Road,Nedimala,Dehiwala,Sri Lanka.<br> 
+     ___________________________________________________</td>
+    </tr></table>
+    
+    <table>
+    <tr><td > Customer Name:<br> 
+    Customer Address:<br>
+     Print By : </td>
+     <td> Invioce No: <br>
+     Invoice Date: <br>
+     PO No:
+     </td>
+     </tr></table>
+     
+       
+    <table class="table table-bordered">
     <tr>
-     <th width="40%">Name</th>
-     <th width="15%">Quantity</th>
-     <th width="15%">Price</th>
-     <th width="15%">Total</th>
+     <th width="10%">Item Code</th>
+     <th width="45%">Description</th>
+     <th width="10%">Quantity</th>
+     <th width="10%">Price</th>    
+     <th width="10%">Discount</th>
+     <th width="10%">Total</th>
     </tr>
+    
+    
 
   ';
         $count = 0;
@@ -329,6 +339,7 @@ class InvoiceC extends CI_Controller
             $count++;
             $output .= '
    <tr> 
+    <td>' . $items["name"] . '</td>
     <td>' . $items["name"] . '</td>
     <td>' . $items["qty"] . '</td>
     <td>' . $items["price"] . '</td>
@@ -348,7 +359,7 @@ class InvoiceC extends CI_Controller
   ';
         $this->pdf->loadHtml($output);
         $this->pdf->render();
-        $this->pdf->stream("".$nm1.".pdf", array("Attachment" => 0));
+        $this->pdf->stream("" . $nm1 . ".pdf", array("Attachment" => 0));
     }
-}
 
+}

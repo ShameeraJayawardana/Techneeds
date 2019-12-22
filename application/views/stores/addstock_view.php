@@ -12,8 +12,11 @@
                                     function myFunction() {
                                         var itmGrp = document.getElementById("itm_grp").value;
                                         var itmSubGrp = document.getElementById("itmsub_grp").value;
-                                        var itmCd = itmGrp.concat(itmSubGrp);
-                                        var code = itmCd.concat("AA");
+                                        var itmSize = document.getElementById("itm_size").value;
+                                        var itmPack = document.getElementById("itm_pack").value;
+                                        var itmCd1 = itmGrp.concat(itmSubGrp);
+                                        var itmCd2 = itmCd1.concat(itmSize);
+                                        var code = itmCd2.concat(itmPack);
                                         document.getElementById("itm_cod").value = code;
                                     }
                                 </script>
@@ -35,7 +38,7 @@
                         <select name="itm_grp" class="form-control" id="itm_grp" required oninput="myFunction()">
                             <option value="" selected disabled>Select Category</option>
                             <?php
-                            foreach ($records as $rec) {
+                            foreach ($grpRecords as $rec) {
                                 ?>
                                 <option value="<?php echo $rec->grpCd; ?>"><?php echo $rec->grp; ?></option>
                             <?php } ?>
@@ -48,6 +51,36 @@
                     <div class="col-sm-8 ">
                         <select id="itmsub_grp" name="itmsub_grp" class="form-control" required oninput="myFunction()">
                             <option value="" selected disabled>Select Item</option>
+                        </select>
+                    </div>
+                </div>
+                
+                 <div class="form-group">
+                    <label class="control-label col-sm-4" for="itm_size">Size</label>
+                    <div class="col-sm-8 ">
+                        <select id="itm_size" name="itm_size" class="form-control" required oninput="myFunction()">
+                            <option value="" selected disabled>Select Size</option>
+                            <?php 
+                                                        foreach ($sizeRecords as $rec){
+                                                         ?>
+                            <option value="<?php echo $rec->sizeCd; ?>"><?php echo $rec->size; ?></option>
+                            <?php                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+                
+                 <div class="form-group">
+                    <label class="control-label col-sm-4" for="itm_pack">Packing</label>
+                    <div class="col-sm-8 ">
+                        <select id="itm_pack" name="itm_pack" class="form-control" required oninput="myFunction()">
+                            <option value="" selected disabled>Select Packing</option>
+                            <?php 
+                                                        foreach ($packRecords as $rec){
+                                                         ?>
+                            <option value="<?php echo $rec->packCd; ?>"><?php echo $rec->pack; ?></option>
+                            <?php                            }
+                            ?>
                         </select>
                     </div>
                 </div>
@@ -146,7 +179,7 @@
                 </div-->
 
                 <div class="form-group">
-                    <label class="control-label col-sm-4" for="intl_qty">Initial Quantity</label>
+                    <label class="control-label col-sm-4" for="intl_qty"> Quantity</label>
                     <div class="col-sm-8" id="intl_qty">
                         <input type="text" class="form-control input-sm" name="quantity">
                     </div>
@@ -160,11 +193,11 @@
                 </div-->
 
                 <div class="col-sm-4 col-sm-offset-2">
-                    <button id="add_itm_btn" type="submit" class="btn btn-primary form-control">Add Item</button>
+                    <button id="add_itm_btn" type="submit" class="btn btn-primary form-control">Add Stock</button>
                 </div>
 
                 <div class="col-sm-4 ">
-                    <button id="reset_btn" type="reset" class="btn btn-primary form-control ">Reset</button>
+                    <button id="reset_btn" type="reset" class="btn btn-warning form-control ">Reset</button>
                 </div>
 
             </form>
