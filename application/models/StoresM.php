@@ -5,10 +5,15 @@ class StoresM extends CI_Model {
     public function __construct() {
         parent::__construct();
     }
+
+    public function saveAddCat($catArray) {
+        //insert data in to catogry table
+        $this->db->insert("itemgroup", $catArray); //insert(table name,data array)
+    }
     
     public function saveAddItemCat($catArray) {
         //insert data in to catogry table
-        $this->db->insert("itemgroup", $catArray); //insert(table name,data array)
+        $this->db->insert("itemsubgroup", $catArray); //insert(table name,data array)
     }
     
     public function saveAddNewItem($newItem) {

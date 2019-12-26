@@ -92,13 +92,27 @@ class StoresC extends CI_Controller {
         $this->load->view("/common/footer_view");
     }
 
-    public function addCategory() {
-        $catCode = $this->input->post('itm_cat_id');
-        $itemCat = $this->input->post('itm_cat');
+    public function addNewCategory() {
+        $itm_cat_id = $this->input->post('itm_cat_id');
+        $itm_cat = $this->input->post('itm_cat');
 
         $catArray = array(
-            'grpCd' => $catCode,
-            'grp' => $itemCat,
+            'grpCd' => $itm_cat_id,
+            'grp' => $itm_cat
+        );
+        $this->StoresM->saveAddCat($catArray);
+        redirect(base_url() . 'StoresC/stores_newitemcat');
+    }
+
+    public function addCategory() {
+        $itemCode = $this->input->post('itm_grp');
+        $itemSubCat = $this->input->post('itm_sup_cod');
+        $itemDis = $this->input->post('item_Dis');
+
+        $catArray = array(
+            'subGrpCd' => $itemSubCat,
+            'subGrp' => $itemDis,
+            'grpCd' => $itemCode
         );
         $this->StoresM->saveAddItemCat($catArray);
         redirect(base_url() . 'StoresC/stores_newitemcat');
