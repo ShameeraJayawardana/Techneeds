@@ -6,6 +6,20 @@ class ReportsM extends CI_Model {
         parent::__construct();
     }
 
+    public function getCatList_Mf() {
+        $query = $this->db->get('itemgroup');
+        if ($query->num_rows() > 0){
+            return $query->result();
+        }
+    }
+    
+    public function getItemQnty_Mf() {
+        $query = $this->db->get('item');
+        if ($query->num_rows() > 0){
+            return $query->result();
+        }
+    }
+
     public function getAllitemsData() {
 
 
@@ -22,7 +36,7 @@ class ReportsM extends CI_Model {
         $query = $this->db->get(); //SELECT*FROM item table
         return $query->result();
     }
-    
+
     public function getitemCatData() {
 
 

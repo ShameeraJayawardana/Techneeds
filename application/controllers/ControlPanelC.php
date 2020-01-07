@@ -30,6 +30,18 @@ class ControlPanelC extends CI_Controller
         $this->load->view("/common/body_end_view");
         $this->load->view("/common/footer_view");
     }
+    
+     public function permission()
+    {
+$data['records'] = $this->ControlPanelM->getRole();
+        $this->load->view("/common/header_view");
+        $this->load->view("/common/body_start_view");
+        $this->load->view("/common/main_menu_view");
+        $this->load->view("/controlPanel/controlPanel_menu");
+        $this->load->view("/controlPanel/permission_view");
+        $this->load->view("/common/body_end_view");
+        $this->load->view("/common/footer_view");
+    }
 
     public function addUser()
     {
@@ -140,4 +152,10 @@ class ControlPanelC extends CI_Controller
             }
         }
     }
+    
+     public function fpdf (){
+            $this->load->library('Myfpdf');
+            $data['text']='dfgfdg';
+            $this->load->view('fpdf',$data);
+        }
 }

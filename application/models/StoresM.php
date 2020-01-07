@@ -6,10 +6,23 @@ class StoresM extends CI_Model {
         parent::__construct();
     }
 
+    public function saveAddCat($catArray) {
+        //insert data in to catogry table
+        $this->db->insert("itemgroup", $catArray); //insert(table name,data array)
+    }
+    
+    public function saveAddItemCat($catArray) {
+        //insert data in to catogry table
+        $this->db->insert("itemsubgroup", $catArray); //insert(table name,data array)
+    }
+    
+    
     public function saveAddItem($itemArray) {
         //insert data in to item table
         $this->db->insert("unitprice", $itemArray); //insert(table name,data array)
     }
+    
+    
     
     public function getItmGrp(){
         $query = $this->db->get('itemgroup');
@@ -35,6 +48,20 @@ class StoresM extends CI_Model {
             return $query->result();
         }
     }
+    
+    public function getItmSize(){
+        $query = $this->db->get('itemsize');
+        if ($query->num_rows() > 0){
+            return $query->result();
+        }
+    }
+    
+    public function getItmPack(){
+        $query = $this->db->get('itempack');
+        if ($query->num_rows() > 0){
+            return $query->result();
+        }
+    }
 
     public function getAllitemsData() {
 
@@ -51,5 +78,41 @@ class StoresM extends CI_Model {
         $query = $this->db->get(); //SELECT*FROM item table
         return $query->result();
     }
+    
+     public function fetchItemSearch($query)
+    {
+        $this->db->select("*");
+        $this->db->from("itemsubgroup");
+        if ($query != '') {
+            $this->db->like('subGrpCd', $query);
+            $this->db->or_like('subGrp', $query);
+            //$this->db->or_like('adrs', $query);
+           // $this->db->or_like('phnM', $query);
+           // $this->db->or_like('phnH', $query);
+           // $this->db->or_like('nic', $query);
+        }
+        $this->db->order_by('Id', 'DESC');
+        return $this->db->get();
+    }
+    
+     public function searchItem($item)
+    {
+        $this->db->select("*");
+        $this->db->from("itemsubgroup");
+        $this->db->where('Id', $item);
+        $query = $this->db->get();
+        return $query->result();
+    }
+    //--------------------
+     public function editItem($item)
+    {
+        $this->db->select("*");
+        $this->db->from("itemsubgroup");
+        $this->db->where('itemsubgroup.itemCd', $item);
+        $query = $this->db->get();
+        return $query->result();
+    }
+    //-----------------------
+    
 
 }

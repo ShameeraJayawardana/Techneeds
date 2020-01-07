@@ -75,11 +75,11 @@
                 </div>
 
                 <div class="col-sm-4 col-sm-offset-2" >
-                    <button  id="addRole_btn" type="submit" class="btn btn-primary form-control" name="addNew" >Add New Role</button>
+                    <button  id="addRole_btn" type="submit" class="btn btn-primary form-control" name="addNew" >Add Employee</button>
                 </div>
 
                 <div class="col-sm-4 ">
-                    <button  id="reset_btn" type="reset" class="btn btn-primary form-control ">Cancel</button>
+                    <button  id="reset_btn" type="reset" class="btn btn-danger form-control ">Cancel</button>
                 </div>
 
             </form>

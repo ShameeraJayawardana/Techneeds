@@ -1,5 +1,5 @@
 <!--Start body_end-->
 
-</div>
+</body>
 
 <!--End body_end-->

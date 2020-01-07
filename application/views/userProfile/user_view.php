@@ -1,9 +1,11 @@
 <!-- Icon Cards-->
+<div class="content-wrapper">
+    <div class="container">
 <div class="row">
     <div class="col-md-12">
         <form method="post" enctype="multipart/form-data" id="upload_form">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <input type="hidden" name="MAX_FILE_SIZE" value="5000000">
                     <label class="btn btn-outline-light btn-file">
                         <img src="<?php echo $row['0']->profile_pic; ?>" id="profilepic"
@@ -15,43 +17,50 @@
                         <input type="file" name="image_upload" id="image_upload" style="display: none;">
                     </label><br/>
                     <input type="submit" name="upload" id="upload" value="UPLOAD" class="btn btn-outline-dark"
-                           style="width: 65%;">
+                           style="width: 55%;">
                     <div id="uploaded_image">
 
                     </div>
                 </div>
-                <div class="col-md-8">
+
+                <div class="col-md-7">
+                <!-- Breadcrumbs-->
+
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="#">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active"><?php echo htmlentities($row['0']->role); ?></li>
+        </ol>
+                <div class="col-md-6">
                     <span><?php echo $row['0']->nm1;
                         echo " ";
                         echo $row['0']->nm2; ?></span><br/><br/>
-                    <span><?php echo $row['0']->role; ?></span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <span><?php echo $row['0']->nic; ?></span>
-                </div>
-                <div class="col-md-8">
-                    <span><?php echo $row['0']->adrs1;
+                    <span><?php echo $row['0']->role; ?></span><br/><br/>
+                     <span><?php echo $row['0']->nic; ?></span><br/><br/>
+                      <span><?php echo $row['0']->adrs1;
                         echo ", ";
                         echo $row['0']->adrs2;
                         echo ", ";
-                        echo $row['0']->adrs3; ?></span>
+                        echo $row['0']->adrs3; ?></span><br/><br/>
+                        <span><?php echo $row['0']->phnM; ?></span><br/><br/>
+                         <span><?php echo $row['0']->phnH; ?></span><br/><br/>
+
+                          <button type="button" class="btn btn-link" data-toggle="modal" data-target="#changePwd" style="padding-left: 0;">CHANGE PASSWORD</button>
+
                 </div>
+
+
             </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <span><?php echo $row['0']->phnM; ?></span>
-                </div>
-                <div class="col-md-8">
-                    <span><?php echo $row['0']->phnH; ?></span>
-                </div>
+           
+                
             </div>
         </form>
     </div>
-    <div class="col-md-8" id="user-data">
-
-    </div>
+</div>
+    
+</div>
+</div>
 </div>
 <script>
     $(document).ready(function () {

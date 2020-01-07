@@ -18,6 +18,8 @@ class userProfileC extends CI_Controller
         $this->load->view("/userProfile/user_view", $data);
         $this->load->view("/common/body_end_view");
         $this->load->view("/common/footer_view");
+        
+
     }
 
     public function uploadImage()
