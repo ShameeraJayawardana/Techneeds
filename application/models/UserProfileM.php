@@ -1,12 +1,15 @@
 <?php
 
-class UserProfileM extends CI_Model {
+class UserProfileM extends CI_Model
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
-    public function getUserData() {
+    public function getUserData()
+    {
 //        $username = $this->session->userdata('username');
         $empId = $this->session->userdata('emp_id');
         $this->db->select('*');
@@ -17,9 +20,24 @@ class UserProfileM extends CI_Model {
         return $this->db->get()->result();
     }
 
-    public function updateImageData($image) {
+    public function updateImageData($image)
+    {
         $empId = $this->session->userdata('emp_id');
-        $sql = "UPDATE emp SET profile_pic='".$image."' WHERE empId = '".$empId."'";
+        $sql = "UPDATE emp SET profile_pic='" . $image . "' WHERE empId = '" . $empId . "'";
         $this->db->query($sql);
+    }
+
+    public function getUser($userid)
+    {
+        $query = $this->db->query("select * from users where userId='" . $userid . "'");
+        if ($query->num_rows() == 1) {
+            return $query->row();
+        }
+        throw new Exception("no user data found");
+    }
+
+    public function change_pass($session_id, $new_pass)
+    {
+        $update_pass = $this->db->query("UPDATE users set userPw='$new_pass'  where userId='$session_id'");
     }
 }
