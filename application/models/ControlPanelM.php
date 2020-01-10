@@ -19,6 +19,7 @@ class ControlPanelM extends CI_Model {
     }
 
     public function getRole() {
+        
         $query = $this->db->get('role'); //SELECT*FROM item table
         return $query->result();
     }

@@ -78,6 +78,14 @@ class StoresM extends CI_Model {
         $query = $this->db->get(); //SELECT*FROM item table
         return $query->result();
     }
+    /////////
+     public function getItemCode(){
+      
+        $query = $this->db->get('item');
+        if ($query->num_rows() > 0){
+            return $query->result();
+        }
+     }
     
      public function fetchItemSearch($query)
     {
@@ -103,6 +111,13 @@ class StoresM extends CI_Model {
         $query = $this->db->get();
         return $query->result();
     }
+    
+    public function getStore(){
+        $query = $this->db->get('stores');
+        if ($query->num_rows() > 0){
+            return $query->result();
+        }
+    }
     //--------------------
      public function editItem($item)
     {
@@ -114,5 +129,21 @@ class StoresM extends CI_Model {
     }
     //-----------------------
     
+     public function searchCategory(){
+
+     ## Fetch records
+     $this->db->distinct();
+     $this->db->select('storeCd');
+     $this->db->order_by('storeCd','asc');
+     $records = $this->db->get('stores')->result();
+
+     $data = array();
+
+     foreach($records as $record ){
+        $data[] = $record->city;
+     }
+
+     return $data;
+   }
 
 }

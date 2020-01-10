@@ -8,18 +8,18 @@
 
             <!--form class="form-horizontal" method="post" action="<?php echo base_url() ?>storesC/form_validation" -->
             <form class="form-horizontal" method="post" action="<?php echo base_url() ?>storesC/additem">
-                                <script>
-                                    function myFunction() {
-                                        var itmGrp = document.getElementById("itm_grp").value;
-                                        var itmSubGrp = document.getElementById("itmsub_grp").value;
-                                        var itmSize = document.getElementById("itm_size").value;
-                                        var itmPack = document.getElementById("itm_pack").value;
-                                        var itmCd1 = itmGrp.concat(itmSubGrp);
-                                        var itmCd2 = itmCd1.concat(itmSize);
-                                        var code = itmCd2.concat(itmPack);
-                                        document.getElementById("itm_cod").value = code;
-                                    }
-                                </script>
+                <script>
+                    function myFunction() {
+                        var itmGrp = document.getElementById("itm_grp").value;
+                        var itmSubGrp = document.getElementById("itmsub_grp").value;
+                        var itmSize = document.getElementById("itm_size").value;
+                        var itmPack = document.getElementById("itm_pack").value;
+                        var itmCd1 = itmGrp.concat(itmSubGrp);
+                        var itmCd2 = itmCd1.concat(itmSize);
+                        var code = itmCd2.concat(itmPack);
+                        document.getElementById("itm_cod").value = code;
+                    }
+                </script>
 
                 <!--div class="form-group" >
                     <label class="control-label col-sm-4"  for="prd_srv">Product/Service</label>
@@ -54,32 +54,32 @@
                         </select>
                     </div>
                 </div>
-                
-                 <div class="form-group">
+
+                <div class="form-group">
                     <label class="control-label col-sm-4" for="itm_size">Size</label>
                     <div class="col-sm-8 ">
                         <select id="itm_size" name="itm_size" class="form-control" required oninput="myFunction()">
                             <option value="" selected disabled>Select Size</option>
-                            <?php 
-                                                        foreach ($sizeRecords as $rec){
-                                                         ?>
-                            <option value="<?php echo $rec->sizeCd; ?>"><?php echo $rec->size; ?></option>
-                            <?php                            }
+                            <?php
+                            foreach ($sizeRecords as $rec) {
+                                ?>
+                                <option value="<?php echo $rec->sizeCd; ?>"><?php echo $rec->size; ?></option>
+                            <?php }
                             ?>
                         </select>
                     </div>
                 </div>
-                
-                 <div class="form-group">
+
+                <div class="form-group">
                     <label class="control-label col-sm-4" for="itm_pack">Packing</label>
                     <div class="col-sm-8 ">
                         <select id="itm_pack" name="itm_pack" class="form-control" required oninput="myFunction()">
                             <option value="" selected disabled>Select Packing</option>
-                            <?php 
-                                                        foreach ($packRecords as $rec){
-                                                         ?>
-                            <option value="<?php echo $rec->packCd; ?>"><?php echo $rec->pack; ?></option>
-                            <?php                            }
+                            <?php
+                            foreach ($packRecords as $rec) {
+                                ?>
+                                <option value="<?php echo $rec->packCd; ?>"><?php echo $rec->pack; ?></option>
+                            <?php }
                             ?>
                         </select>
                     </div>

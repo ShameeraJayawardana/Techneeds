@@ -38,7 +38,7 @@ $data['records'] = $this->ControlPanelM->getRole();
         $this->load->view("/common/body_start_view");
         $this->load->view("/common/main_menu_view");
         $this->load->view("/controlPanel/controlPanel_menu");
-        $this->load->view("/controlPanel/permission_view");
+        $this->load->view("/controlPanel/permission_view",$data);
         $this->load->view("/common/body_end_view");
         $this->load->view("/common/footer_view");
     }

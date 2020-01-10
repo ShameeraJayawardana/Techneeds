@@ -13,6 +13,13 @@ class ReportsM extends CI_Model {
         }
     }
     
+    public function getpo_Mf() {
+        $query = $this->db->get('purchaseorder');
+        if ($query->num_rows() > 0){
+            return $query->result();
+        }
+    }
+    
     public function getItemQnty_Mf() {
         $query = $this->db->get('item');
         if ($query->num_rows() > 0){

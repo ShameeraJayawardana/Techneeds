@@ -119,11 +119,13 @@ class InvoiceC extends CI_Controller {
     }
 
     public function cust_order() {
+        
+        $data['getcustomer'] = $this->InvoiceM->getCustomerData();
         $this->load->view("/common/header_view");
         $this->load->view("/common/body_start_view");
         $this->load->view("/common/main_menu_view");
-        $this->load->view("/stores/stores_menu_view");
-        $this->load->view("/stores/form_additem_view");
+        $this->load->view("/invoice/invoice_menu_view");
+        $this->load->view("/invoice/customer_view", $data);
         $this->load->view("/common/body_end_view");
         $this->load->view("/common/footer_view");
     }
@@ -169,6 +171,7 @@ class InvoiceC extends CI_Controller {
         $adrs = $this->input->post('adrs');
         $mobile = $this->input->post('mobile');
         $home = $this->input->post('home');
+        $shop = $this->input->post('shop');
         $custgrp = $this->input->post('custgrp_select');
 
         $cusArray = array(
@@ -178,7 +181,7 @@ class InvoiceC extends CI_Controller {
             'adrs' => $adrs,
             'phnM' => $mobile,
             'phnH' => $home,
-            'phnS' => "",
+            'phnS' => $shop,
             'nic' => $nic,
         );
         $this->InvoiceM->saveCustomer($cusArray);

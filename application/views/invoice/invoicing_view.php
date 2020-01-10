@@ -40,6 +40,7 @@
                                 <input type="text" class="form-control" name="adrs" placeholder="Address"/><br/><br/>
                                 <input type="text" class="form-control" name="mobile" placeholder="Mobile"/><br/><br/>
                                 <input type="text" class="form-control" name="home" placeholder="Home"/><br/><br/>
+                                <input type="text" class="form-control" name="shop" placeholder="shop"/><br/><br/>
                                 <select class="form-control" name="custgrp_select">
                                     <option value="">Select Group</option>
                                     <option value="1">Retail</option>

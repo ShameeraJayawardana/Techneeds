@@ -105,4 +105,10 @@ class InvoiceM extends CI_Model
         $query = $this->db->get();
         return $query->result();
     }
+    
+    public function getCustomerData() {
+               
+        $query = $this->db->get('customer'); //SELECT*FROM item table
+        return $query->result();
+    }
 }

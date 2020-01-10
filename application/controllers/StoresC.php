@@ -5,11 +5,14 @@ class StoresC extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('StoresM');
+        $this->load->library('pagination');
     }
 
     public function stores_allitems() {
         $this->load->model('StoresM');
         $data['records'] = $this->StoresM->getAllitemsData();
+        $data['grpRecords'] = $this->StoresM->getItmGrp();
+        $data['storeRecords'] = $this->StoresM->getStore();
         $this->load->view("/common/header_view");
         $this->load->view("/common/body_start_view");
         $this->load->view("/common/main_menu_view");
@@ -136,7 +139,7 @@ class StoresC extends CI_Controller {
   <div class="table-responsive">
      <table class="table table-bordered table-striped">
       <tr>
-       <th></th>
+       <th>Item Code</th>
        <th>id </th>
        <th>subgupcode</th>
        <th>subgroup</th>
@@ -175,6 +178,21 @@ class StoresC extends CI_Controller {
         $newdata = array();
         $newdata = $this->StoresM->searchCustomer($item);
         $this->session->set_userdata($newdata);
+    }
+    
+    public function viewItem() {
+        $this->load->model('StoresM');
+        $data['records'] = $this->StoresM->getAllitemsData();
+        $data['grpRecords'] = $this->StoresM->getItmGrp();
+       // $data['itemdis'] = $this->StoresM->getItemCode();
+        $data['itemdis'] = $this->StoresM->getItmSubGrp();
+        $this->load->view("/common/header_view");
+        $this->load->view("/common/body_start_view");
+        $this->load->view("/common/main_menu_view");
+        $this->load->view("/stores/stores_menu_view");
+        $this->load->view("/stores/item_view", $data);
+        $this->load->view("/common/body_end_view");
+        $this->load->view("/common/footer_view");
     }
 
     public function form_validation() {

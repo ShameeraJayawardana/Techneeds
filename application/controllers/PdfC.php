@@ -16,6 +16,16 @@ class PdfC extends CI_Controller {
         //see it in the view file
         $this->load->view("/printPdf/allcategoriesPdf_view", $data);
     }
+    
+    public function poPrint() {
+        //load library 1st
+        $this->load->library('myfpdf');
+        //lets send some data from controller to view file
+        //$this->load->model('ReportsM');
+        $data['po'] = $this->ReportsM->getCatList_Mf();
+        //see it in the view file
+        $this->load->view("/printPdf/poPdf_view", $data);
+    }
 
     public function allitems_Cf() {
         $this->load->library('myfpdf');
@@ -29,7 +39,7 @@ class PdfC extends CI_Controller {
         //load library 1st
         $this->load->library('myfpdf');
         //lets send some data from controller to view file
-        $data['txt'] = 'Piyathilaka FPDF test page';
+        $data['txt'] = 'Tharika FPDF test page';
         //see it in the view file
         $this->load->view("/printPdf/allItemsPdf", $data);
     }

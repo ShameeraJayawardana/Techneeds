@@ -32,7 +32,7 @@
                         <input type="text " class="form-control input-sm" name="itm_cat">
                     </div>
                     <div class="form-group col-md-2 col-sm-offset-8">
-                        <button id="add" type="submit" class="btn btn-primary form-control">Add</button>
+                       <button id="add" type="submit" class="btn btn-primary form-control">Add</button>
                     </div>
                 </div>
             </form>
