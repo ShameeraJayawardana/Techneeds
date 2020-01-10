@@ -111,19 +111,19 @@ class InvoiceC extends CI_Controller {
         }
         return $output;
     }
-
     public function fetchItemDetails() {
         if ($this->input->post('itmsub_grp')) {
             echo $this->InvoiceM->fetchItemDetails($this->input->post('itmsub_grp'));
         }
     }
 
-    public function cust_order() {
-        
-        $data['getcustomer'] = $this->InvoiceM->getCustomerData();
+    {
+$data['getcustomer'] = $this->InvoiceM->getCustomerData();
         $this->load->view("/common/header_view");
         $this->load->view("/common/body_start_view");
         $this->load->view("/common/main_menu_view");
+        $this->load->view("/stores/stores_menu_view");
+        $this->load->view("/stores/form_additem_view");
         $this->load->view("/invoice/invoice_menu_view");
         $this->load->view("/invoice/customer_view", $data);
         $this->load->view("/common/body_end_view");

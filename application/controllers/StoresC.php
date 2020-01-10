@@ -191,9 +191,112 @@ class StoresC extends CI_Controller {
         $this->load->view("/common/main_menu_view");
         $this->load->view("/stores/stores_menu_view");
         $this->load->view("/stores/item_view", $data);
+        $this->load->view("/common/body_start_view");
+        $this->load->view("/common/main_menu_view");
+        $this->load->view("/stores/stores_menu_view");
+        $this->load->view("/stores/newitemcat_view", $data);
+
         $this->load->view("/common/body_end_view");
         $this->load->view("/common/footer_view");
     }
+    
+    public function addNewCategory() {
+        $itm_cat_id = $this->input->post('itm_cat_id');
+        $itm_cat = $this->input->post('itm_cat');
+
+        $catArray = array(
+            'grpCd' => $itm_cat_id,
+            'grp' => $itm_cat
+        );
+        $this->StoresM->saveAddCat($catArray);
+        redirect(base_url() . 'StoresC/stores_newitemcat');
+    }
+
+    public function addCategory() {
+        $itemCode = $this->input->post('itm_grp');
+        $itemSubCat = $this->input->post('itm_sup_cod');
+        $itemDis = $this->input->post('item_Dis');
+
+        $catArray = array(
+            'subGrpCd' => $itemSubCat,
+            'subGrp' => $itemDis,
+            'grpCd' => $itemCode
+        );
+        $this->StoresM->saveAddItemCat($catArray);
+        redirect(base_url() . 'StoresC/stores_newitemcat');
+    }
+
+    public function addNewItem() {
+
+        $ItemGrp = $this->input->post('itm_grp');
+        $itemSupCode = $this->input->post('itm_sup_cod');
+        $itemDis = $this->input->post('item_Dis');
+        //$itemSize = $this->input->post('itmsize');
+        //$itempack = $this->input->post('itmpack');
+
+        $newItem = array(
+            'grpCd' => $ItemGrp,
+            'subGrpCd' => $itemSupCode,
+            'subGrp' => $itemDis,
+            'sizeCd' => '',
+            'packCd' => ''
+        );
+        $this->StoresM->saveAddNewItem($newItem);
+        redirect(base_url() . 'StoresC/stores_newitemcat');
+    }
+
+    public function fetchItemSearch() {
+        $output = '';
+        $query = '';
+        $this->load->model('StoresM');
+        if ($this->input->post('query')) {
+            $query = $this->input->post('query');
+        }
+        $data = $this->StoresM->fetchItemSearch($query);
+        $output .= '
+   <div class="container">         
+  <div class="table-responsive">
+     <table class="table table-bordered table-striped">
+      <tr>
+       <th></th>
+       <th>id </th>
+       <th>subgupcode</th>
+       <th>subgroup</th>
+       <th>Home</th>
+       <th>NIC</th>
+       <th>Customer Group</th>
+      </tr>
+  ';
+        if ($data->num_rows() > 0) {
+            foreach ($data->result() as $row) {
+                $output .= '
+      <tr>
+      
+       <td>' . $row->subGrpCd . " " . /* $row->nm2 . */'</td>
+       <td>' . $row->subGrp . '</td>
+       <td>' . $row->grpCd . '</td>
+       <td>' . /* $row->phnH . */ '</td>
+       <td>' . /* $row->nic . */'</td>
+       <td>' . /* $row->custGrpCd . */ '</td>
+      </tr>
+    ';
+            }
+        } else {
+            $output .= '<tr>
+       <td colspan="6">No Data Found</td>
+      </tr>';
+        }
+        $output .= '</table> </div> </div>';
+        
+        echo $output;
+    }
+
+//    public function searchItem() {
+//        $item = $_POST["itemsubgroup"];
+//        $newdata = array();
+//        $newdata = $this->StoresM->searchItem($item);
+//        $this->session->set_userdata($newdata);
+//    }
 
     public function form_validation() {
 
@@ -207,3 +310,4 @@ class StoresC extends CI_Controller {
     }
 
 }
+

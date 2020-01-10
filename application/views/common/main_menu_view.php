@@ -32,6 +32,9 @@
               <li><a href="<?php echo base_url('repaireC/addRepairItem'); ?>"> Repair Center</a></li>
                 <li><a href="<?php echo base_url('transportC/newAssign'); ?>">Transport</a></li>
                 <li><a href="<?php echo base_url('ReportsC/allReports_Cf'); ?>">Reports</a></li>
+
+                <li><a href="<?php echo base_url('ReportsC/allitemsR'); ?>">Reports PDF</a></li>
+
                 <li><a href="<?php echo base_url('ControlPanelC/activityControl'); ?>"><span class="glyphicon glyphicon-cog"></span> </a></li>                
                 <li><a href=<span class="glyphicon glyphicon-earphone"></span></a></li>
 

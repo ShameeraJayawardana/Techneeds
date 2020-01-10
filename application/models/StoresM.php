@@ -16,14 +16,17 @@ class StoresM extends CI_Model {
         $this->db->insert("itemsubgroup", $catArray); //insert(table name,data array)
     }
     
-    
+    public function saveAddNewItem($newItem) {
+        //insert data in to item table
+        $this->db->insert("itemsubgroup", $newItem); //insert(table name,data array)
+    }
+
     public function saveAddItem($itemArray) {
         //insert data in to item table
         $this->db->insert("unitprice", $itemArray); //insert(table name,data array)
     }
     
-    
-    
+
     public function getItmGrp(){
         $query = $this->db->get('itemgroup');
         if ($query->num_rows() > 0){
@@ -78,7 +81,7 @@ class StoresM extends CI_Model {
         $query = $this->db->get(); //SELECT*FROM item table
         return $query->result();
     }
-    /////////
+
      public function getItemCode(){
       
         $query = $this->db->get('item');
@@ -147,3 +150,4 @@ class StoresM extends CI_Model {
    }
 
 }
+

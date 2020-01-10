@@ -21,6 +21,19 @@
                     }
                 </script>
 
+                                <script>
+                                    function myFunction() {
+                                        var itmGrp = document.getElementById("itm_grp").value;
+                                        var itmSubGrp = document.getElementById("itmsub_grp").value;
+                                        var itmSize = document.getElementById("itm_size").value;
+                                        var itmPack = document.getElementById("itm_pack").value;
+                                        var itmCd1 = itmGrp.concat(itmSubGrp);
+                                        var itmCd2 = itmCd1.concat(itmSize);
+                                        var code = itmCd2.concat(itmPack);
+                                        document.getElementById("itm_cod").value = code;
+                                    }
+                                </script>
+
                 <!--div class="form-group" >
                     <label class="control-label col-sm-4"  for="prd_srv">Product/Service</label>
                     <div class="col-sm-8">
@@ -51,6 +64,36 @@
                     <div class="col-sm-8 ">
                         <select id="itmsub_grp" name="itmsub_grp" class="form-control" required oninput="myFunction()">
                             <option value="" selected disabled>Select Item</option>
+                        </select>
+                    </div>
+                </div>
+                
+                 <div class="form-group">
+                    <label class="control-label col-sm-4" for="itm_size">Size</label>
+                    <div class="col-sm-8 ">
+                        <select id="itm_size" name="itm_size" class="form-control" required oninput="myFunction()">
+                            <option value="" selected disabled>Select Size</option>
+                            <?php 
+                                                        foreach ($sizeRecords as $rec){
+                                                         ?>
+                            <option value="<?php echo $rec->sizeCd; ?>"><?php echo $rec->size; ?></option>
+                            <?php                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+                
+                 <div class="form-group">
+                    <label class="control-label col-sm-4" for="itm_pack">Packing</label>
+                    <div class="col-sm-8 ">
+                        <select id="itm_pack" name="itm_pack" class="form-control" required oninput="myFunction()">
+                            <option value="" selected disabled>Select Packing</option>
+                            <?php 
+                                                        foreach ($packRecords as $rec){
+                                                         ?>
+                            <option value="<?php echo $rec->packCd; ?>"><?php echo $rec->pack; ?></option>
+                            <?php                            }
+                            ?>
                         </select>
                     </div>
                 </div>

@@ -15,6 +15,20 @@
                         <option value="0">-- Select Activity --</option>
                         <option value="1">New Category</option>
                         <option value="2">New Item</option>
+<div class="container">
+    <div class="col-sm-8 col-sm-offset-2">
+        <div class="jumbotron">
+
+            <!--            <form class="form-horizontal" method="post" action="-->
+            <?php //echo base_url() ?><!--storesC/addCategory" >-->
+
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="select">Category/Item</label>
+                <div class="col-sm-6">
+                    <select class="form-control" id="mySelect" onchange="return selectFn1();">
+                        <option value="0">-- Select Activity --</option>
+                        <option value="1">Add New Category</option>
+                        <option value="2">Add New Item</option>
                     </select>
                 </div>
             </div>
@@ -38,7 +52,9 @@
             </form>
 
             *********************************************************************************************************
-            <form class="form-horizontal" method="post" action="<?php echo base_url() ?>storesC/addNewItem">
+
+            <form class="form-horizontal" method="post" action="<?php echo base_url() ?>storesC/addCategory">
+
                 <div class="form-group" style="visibility: hidden" id="itmSubCat">
 
                     <label class="control-label col-sm-4" for="itm_grp">Item Group</label>
@@ -70,6 +86,17 @@
                         <img id="preview" style = "width: 200px; height: 200px;">
                         <input type="file" name = "userfile" id="input">
                     </div>                    
+                    </div>
+
+                    <label class="control-label col-sm-4" for="itmsize">Item Size</label>
+                    <div class="form-group col-md-6" id="itmsize">
+                        <input type="text " class="form-control input-sm" name="itmsize">
+                    </div>
+
+                    <label class="control-label col-sm-4" for="itmpack">Item Packing</label>
+                    <div class="form-group col-md-6" id="itmpack">
+                        <input type="text " class="form-control input-sm" name="itmpack">
+                    </div>
 
                     <div class="col-sm-4 col-sm-offset-2">
                         <button id="add_itm_btn" type="submit" class="btn btn-primary form-control">Add Item</button>

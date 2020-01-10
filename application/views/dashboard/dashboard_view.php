@@ -24,7 +24,7 @@
             <a href="<?php echo base_url('InvoiceC/invoicing'); ?>" class="btn btn-sq-lg btn-primary">
                 <!--i class="fa fa-file-text fa-5x"></i><br/-->
                 <font size=6pt >&emsp; Invoice &emsp;<br> &emsp;</font>
-            </a>
+            </a>&nbsp;
 
 
             <a href="<?php echo base_url('StoresC/stores_allitems'); ?>" class="btn btn-sq-lg btn-info">
@@ -46,7 +46,8 @@
 
             <a href="<?php echo base_url('PurchasingOrderC/addSupplier'); ?>" class="btn btn-sq-lg btn-primary">
                 <!--i class="fa fa-file-text fa-5x"></i><br/-->
-                <font size=6pt >&emsp;Purchase&emsp;<br>&emsp;Order&emsp;</font>
+
+                <font size=6pt >&emsp;Purchase&emsp;<br>&emsp; Order &emsp;</font>
             </a>
 
             <a href="<?php echo base_url('MainC/repairCen'); ?>" class="btn btn-sq-lg btn-warning">
@@ -58,12 +59,13 @@
 
             <a href="<?php echo base_url('userProfileC/userProfile'); ?>" class="btn btn-sq-lg btn-success">
                 <!--i class="fa fa-file-text fa-5x"></i><br/-->
-                <font size=6pt >&emsp;My&emsp;<br>&emsp;&nbsp;Profile&nbsp; &emsp;</font>
+                <font size=6pt >&emsp; My &emsp;<br>&emsp; &nbsp;Profile &nbsp; &emsp;</font>
             </a>
 
             <a href="<?php echo base_url('transportC/newAssign'); ?>" class="btn btn-sq-lg btn-primary">
                 <!--i class="fa fa-file-text fa-5x"></i><br/-->
-                <font size=6pt >&nbsp; Transport &nbsp;&emsp; <br> &emsp; &emsp;</font>
+
+                <font size=6pt >&nbsp;Transport&nbsp; <br> &emsp; &emsp;</font>
             </a>
 
             <a href="<?php echo base_url('ControlPanelC/viewUser'); ?>" class="btn btn-sq-lg btn-danger">
@@ -73,9 +75,8 @@
         </div>
     </div>
 
-
-
 </div>
+
 
 
 
