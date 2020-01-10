@@ -181,11 +181,9 @@ class StoresC extends CI_Controller {
     }
     
     public function viewItem() {
+        $itemCode = $this->input->get('itemCode', TRUE);
         $this->load->model('StoresM');
-        $data['records'] = $this->StoresM->getAllitemsData();
-        $data['grpRecords'] = $this->StoresM->getItmGrp();
-       // $data['itemdis'] = $this->StoresM->getItemCode();
-        $data['itemdis'] = $this->StoresM->getItmSubGrp();
+        $data['records'] = $this->StoresM->getSingleitemData($itemCode);
         $this->load->view("/common/header_view");
         $this->load->view("/common/body_start_view");
         $this->load->view("/common/main_menu_view");
@@ -193,11 +191,38 @@ class StoresC extends CI_Controller {
         $this->load->view("/stores/item_view", $data);
         $this->load->view("/common/body_start_view");
         $this->load->view("/common/main_menu_view");
-        $this->load->view("/stores/stores_menu_view");
-        $this->load->view("/stores/newitemcat_view", $data);
 
         $this->load->view("/common/body_end_view");
         $this->load->view("/common/footer_view");
+    }
+
+    public function editItem_view() {
+        $itemCode = $this->input->get('itemCode', TRUE);
+        $this->load->model('StoresM');
+        $data['records'] = $this->StoresM->getSingleitemData($itemCode);
+        $this->load->view("/common/header_view");
+        $this->load->view("/common/body_start_view");
+        $this->load->view("/common/main_menu_view");
+        $this->load->view("/stores/stores_menu_view");
+        $this->load->view("/stores/editItem_view", $data);
+        $this->load->view("/common/body_start_view");
+        $this->load->view("/common/main_menu_view");
+
+        $this->load->view("/common/body_end_view");
+        $this->load->view("/common/footer_view");
+    }
+
+    public function editItem() {
+        $itemCode = $this->input->post('itemCode');
+        $subgroup = $this->input->post('subgroup');
+        $group = $this->input->post('group');
+        $district = $this->input->post('district');
+        $storetype = $this->input->post('storetype');
+        $no = $this->input->post('no');
+
+        $data['row'] = $this->StoresM->editItemDetail($itemCode, $subgroup, $group, $district, $storetype, $no);
+//        redirect(base_url() . 'StoresC/editItem_view?itemCode=' . $itemCode);
+//        print_r($data);
     }
     
     public function addNewCategory() {

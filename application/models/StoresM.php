@@ -77,9 +77,32 @@ class StoresM extends CI_Model {
         $this->db->join('itemsubgroup as e', 'e.subGrpCd = b.subGrpCd');
         $this->db->join('district as f', 'f.dstCd = c.dstCd');
         $this->db->join('storetype as g', 'g.storeTypCd = c.storeTypCd');
-
+//        $this->db->where('a.itemCd', $itemCode);
         $query = $this->db->get(); //SELECT*FROM item table
         return $query->result();
+    }
+
+    public function getSingleitemData($itemCode) {
+
+        $this->db->select('a.itemCd,e.subGrp,d.grp,f.dst,g.storeTyp,c.storeNo'); // SELECT colomn data FROM corresponding table
+        $this->db->from('item as a'); // SELECT item FROM item table
+
+        $this->db->join('itemcode as b', 'b.itemCd = a.itemCd'); // JOIN itemcode table with item table by itemcode.itemCd = table.itemCd
+        $this->db->join('stores as c', 'c.storeCd = a.storeCd');
+        $this->db->join('itemgroup as d', 'd.grpCd = b.grpCd');
+        $this->db->join('itemsubgroup as e', 'e.subGrpCd = b.subGrpCd');
+        $this->db->join('district as f', 'f.dstCd = c.dstCd');
+        $this->db->join('storetype as g', 'g.storeTypCd = c.storeTypCd');
+        $this->db->where('a.itemCd', $itemCode);
+        $query = $this->db->get(); //SELECT*FROM item table
+        return $query->result();
+    }
+
+    public function editItemDetail($itemCode, $subgroup, $group, $district, $storetype, $no) {
+//        return $itemCode . $subgroup . $group . $district . $storetype . $no;
+//        $update = $this->db->query("UPDATE item AS a JOIN itemcode as b ON b.itemCd = a.itemCd JOIN stores as c ON c.storeCd = a.storeCd JOIN itemgroup as d ON d.grpCd = b.grpCd JOIN itemsubgroup as e ON e.subGrpCd = b.subGrpCd JOIN district as f ON f.dstCd = c.dstCd JOIN storetype as g ON g.storeTypCd = c.storeTypCd SET e.subGrp = 'xvvc', d.grp = 'xcvxcv', f.dst = 'cccb', g.storeTyp = 'xcvcv', c.storeNo = 6 WHERE a.itemCd = '1A005AA'");
+        $sql = "UPDATE item AS a JOIN itemcode as b ON b.itemCd = a.itemCd JOIN stores as c ON c.storeCd = a.storeCd JOIN itemgroup as d ON d.grpCd = b.grpCd JOIN itemsubgroup as e ON e.subGrpCd = b.subGrpCd JOIN district as f ON f.dstCd = c.dstCd JOIN storetype as g ON g.storeTypCd = c.storeTypCd SET e.subGrp = '$subgroup', d.grp = '$group', f.dst = '$district', g.storeTyp = '$storetype', c.storeNo = '$no' WHERE a.itemCd = '$itemCode'";
+        $this->db->query($sql);
     }
 
      public function getItemCode(){

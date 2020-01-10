@@ -87,10 +87,10 @@
                             <td><?php echo $rec->storeNo; ?></td>
 
                             <td>
-                                <a href="<?php echo site_url('StoresC/viewItem'); ?>" class="btn btn-success">
+                                <a href="<?php echo site_url('StoresC/viewItem'); ?>?itemCode=<?php echo $rec->itemCd; ?>" onclick="loadfile1(<?php echo $rec->itemCd; ?>)" class="btn btn-success">
                                     <span class="glyphicon glyphicon-eye-open"></span>&nbsp;View
                                 </a>
-                                <a href="<?php echo site_url('StoresC/editItem_view'); ?>itemCode=<?php echo $rec->itemCd; ?>" onclick="loadfile1(<?php echo $rec->itemCd; ?>)" class="btn btn-warning">
+                                <a href="<?php echo site_url('StoresC/editItem_view'); ?>?itemCode=<?php echo $rec->itemCd; ?>" onclick="loadfile1(<?php echo $rec->itemCd; ?>)" class="btn btn-warning">
                                     <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit
                                 </a>
                             </td>  
