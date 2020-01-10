@@ -95,82 +95,82 @@ class StoresC extends CI_Controller {
         $this->load->view("/common/footer_view");
     }
     
-     public function addNewCategory() {
-        $itm_cat_id = $this->input->post('itm_cat_id');
-        $itm_cat = $this->input->post('itm_cat');
-
-        $catArray = array(
-            'grpCd' => $itm_cat_id,
-            'grp' => $itm_cat
-        );
-        $this->StoresM->saveAddCat($catArray);
-        redirect(base_url() . 'StoresC/stores_newitemcat');
-    }
+//     public function addNewCategory() {
+//        $itm_cat_id = $this->input->post('itm_cat_id');
+//        $itm_cat = $this->input->post('itm_cat');
+//
+//        $catArray = array(
+//            'grpCd' => $itm_cat_id,
+//            'grp' => $itm_cat
+//        );
+//        $this->StoresM->saveAddCat($catArray);
+//        redirect(base_url() . 'StoresC/stores_newitemcat');
+//    }
    
 
-    public function addNewItem() {
-
-        $ItemGrp = $this->input->post('itm_grp');
-        $itemSupCode = $this->input->post('itm_sup_cod');
-        $itemDis = $this->input->post('item_Dis');
-        //$itemSize = $this->input->post('itmsize');
-        //$itempack = $this->input->post('itmpack');
-
-        $catArray = array(
-            'grpCd' => $ItemGrp,
-            'subGrpCd' => $itemSupCode,
-            'subGrp' => $itemDis,
-            
-        );
-        $this->StoresM->saveAddItemCat($catArray);
-        redirect(base_url() . 'StoresC/stores_newitemcat');
-    }
+//    public function addNewItem() {
+//
+//        $ItemGrp = $this->input->post('itm_grp');
+//        $itemSupCode = $this->input->post('itm_sup_cod');
+//        $itemDis = $this->input->post('item_Dis');
+//        //$itemSize = $this->input->post('itmsize');
+//        //$itempack = $this->input->post('itmpack');
+//
+//        $catArray = array(
+//            'grpCd' => $ItemGrp,
+//            'subGrpCd' => $itemSupCode,
+//            'subGrp' => $itemDis,
+//            
+//        );
+//        $this->StoresM->saveAddItemCat($catArray);
+//        redirect(base_url() . 'StoresC/stores_newitemcat');
+//    }
     
-     public function fetchItemSearch() {
-        $output = '';
-        $query = '';
-        $this->load->model('StoresM');
-        if ($this->input->post('query')) {
-            $query = $this->input->post('query');
-        }
-        $data = $this->StoresM->fetchItemSearch($query);
-        $output .= '
-   <div class="container">         
-  <div class="table-responsive">
-     <table class="table table-bordered table-striped">
-      <tr>
-       <th>Item Code</th>
-       <th>id </th>
-       <th>subgupcode</th>
-       <th>subgroup</th>
-       <th>Home</th>
-       <th>NIC</th>
-       <th>Customer Group</th>
-      </tr>
-  ';
-        if ($data->num_rows() > 0) {
-            foreach ($data->result() as $row) {
-                $output .= '
-      <tr>
-      
-       <td>' . $row->subGrpCd . " " . /* $row->nm2 . */'</td>
-       <td>' . $row->subGrp . '</td>
-       <td>' . $row->grpCd . '</td>
-       <td>' . /* $row->phnH . */ '</td>
-       <td>' . /* $row->nic . */'</td>
-       <td>' . /* $row->custGrpCd . */ '</td>
-      </tr>
-    ';
-            }
-        } else {
-            $output .= '<tr>
-       <td colspan="6">No Data Found</td>
-      </tr>';
-        }
-        $output .= '</table> </div> </div>';
-
-        echo $output;
-    }
+//     public function fetchItemSearch() {
+//        $output = '';
+//        $query = '';
+//        $this->load->model('StoresM');
+//        if ($this->input->post('query')) {
+//            $query = $this->input->post('query');
+//        }
+//        $data = $this->StoresM->fetchItemSearch($query);
+//        $output .= '
+//   <div class="container">         
+//  <div class="table-responsive">
+//     <table class="table table-bordered table-striped">
+//      <tr>
+//       <th>Item Code</th>
+//       <th>id </th>
+//       <th>subgupcode</th>
+//       <th>subgroup</th>
+//       <th>Home</th>
+//       <th>NIC</th>
+//       <th>Customer Group</th>
+//      </tr>
+//  ';
+//        if ($data->num_rows() > 0) {
+//            foreach ($data->result() as $row) {
+//                $output .= '
+//      <tr>
+//      
+//       <td>' . $row->subGrpCd . " " . /* $row->nm2 . */'</td>
+//       <td>' . $row->subGrp . '</td>
+//       <td>' . $row->grpCd . '</td>
+//       <td>' . /* $row->phnH . */ '</td>
+//       <td>' . /* $row->nic . */'</td>
+//       <td>' . /* $row->custGrpCd . */ '</td>
+//      </tr>
+//    ';
+//            }
+//        } else {
+//            $output .= '<tr>
+//       <td colspan="6">No Data Found</td>
+//      </tr>';
+//        }
+//        $output .= '</table> </div> </div>';
+//
+//        echo $output;
+//    }
 
 
     public function searchItem() {
